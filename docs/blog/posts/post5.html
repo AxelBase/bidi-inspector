@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>AxelBase – Bidirectional Text Inspector</title>
+
+        <link rel="icon" href="../../AxelLab-Logo.ico" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+        
+		<link href="../../_app/immutable/assets/0.Czh0y5js.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/9.Cr4rVQq0.css" rel="stylesheet">
+		<link rel="modulepreload" href="../../_app/immutable/entry/start.DPlYlPXD.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/B0KzICjw.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Mudu1SrX.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/qGMPKCY1.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/XS_dW6fs.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DqBiDvGv.js">
+		<link rel="modulepreload" href="../../_app/immutable/entry/app.BU7B6Hp-.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CJ1yKDwO.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/tUxeNar7.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CdZ01V6E.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/0.CUXDDtYX.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/EB1u2fYE.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Dngzc7Qh.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/COQRr6JS.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DIWwX8dD.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Q79lc3-r.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/9.Xf4HZb9d.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CLwP5XWt.js"><!--1li990r--><meta name="description" content="Why showing both the logical order and final visual rendering is essential to truly understanding bidirectional text attacks."/> <meta property="og:title" content="Visualizing Directionality: Raw vs Rendered Text"/> <meta property="og:description" content="The difference between what is written and what you see — and why both views are critical for security."/> <meta property="og:url" content="../../blog/posts/post5"/> <meta property="og:type" content="article"/> <meta name="twitter:card" content="summary_large_image"/><!----><title>Visualizing Directionality: Raw vs Rendered Text | AxelBase Bidi Inspector</title>
+    </head>
+    <body data-bs-theme="light" data-sveltekit-preload-data="hover">
+        <div style="display: contents"><!--[--><!--[--><!----><header class="fixed-top p-3 w-100 svelte-12qhfyh" style="pointer-events: none; z-index: 1040;"><nav class="container glass rounded-pill px-4 py-2 d-flex justify-content-between align-items-center shadow-sm svelte-12qhfyh" style="pointer-events: auto; max-width: 1320px;"><div class="d-flex align-items-center gap-3 svelte-12qhfyh"><a href="../../" class="d-flex align-items-center gap-2 logo-group text-decoration-none svelte-12qhfyh"><img src="../../AxelLab-Logo.ico" alt="AxelLab Logo" class="navbar-brand-logo svelte-12qhfyh"/> <span class="fw-bold fs-5 d-none d-sm-block brand-text svelte-12qhfyh">AxelBase</span></a></div> <div class="d-flex align-items-center gap-3 svelte-12qhfyh"><ul class="d-none d-lg-flex align-items-center gap-1 m-0 list-unstyled svelte-12qhfyh"><li class="svelte-12qhfyh"><a class="nav-link-custom svelte-12qhfyh" href="../../">Home</a></li> <li class="svelte-12qhfyh"><a class="nav-link-custom svelte-12qhfyh" href="../../#about">About</a></li> <li class="svelte-12qhfyh"><a class="nav-link-custom svelte-12qhfyh" href="../../#how-to-use">How to use</a></li> <li class="svelte-12qhfyh"><a class="nav-link-custom svelte-12qhfyh" href="../../#faq">FAQ</a></li> <li class="svelte-12qhfyh"><a class="nav-link-custom svelte-12qhfyh" href="../../blog">Blog</a></li></ul> <div class="vr mx-2 d-none d-lg-block svelte-12qhfyh" style="color: var(--color-text-main);"></div> <button class="btn btn-icon-only svelte-12qhfyh" aria-label="Toggle Dark Mode"><i class="bi bi-moon-stars-fill theme-icon svelte-12qhfyh"></i></button> <div class="position-relative svelte-12qhfyh"><button class="btn btn-coffee d-flex align-items-center gap-2 svelte-12qhfyh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="coffee-icon svelte-12qhfyh"><path d="M12.35,22.2L12,22A10,10,0,0,1,2,12V10A2,2,0,0,1,4,8H7.2A5.13,5.13,0,0,1,12,3A5.13,5.13,0,0,1,16.8,8H20A2,2,0,0,1,22,10V12A10,10,0,0,1,12.35,22.2M4,10V12A8,8,0,0,0,12,20A8,8,0,0,0,20,12V10H16.8A5.11,5.11,0,0,1,12.5,5.12A5.15,5.15,0,0,1,7.2,10H4Z" class="svelte-12qhfyh"></path></svg> <span class="d-none d-md-inline svelte-12qhfyh">Donate</span></button> <!--[!--><!--]--></div></div></nav></header> <div class="pt-5 mt-4 svelte-12qhfyh"><!--[--><!----><div class="container fade-in post-layout svelte-1li990r"><div class="breadcrumbs svelte-1li990r"><a href="../../blog" class="svelte-1li990r">Blog</a> <span>/</span> <p class="svelte-1li990r">Visualizing Directionality: Raw vs Rendered Text</p></div> <article class="prose svelte-1li990r"><h1 class="svelte-1li990r">Visualizing Directionality: Raw vs Rendered Text</h1> <p class="post-meta svelte-1li990r">Published: December 18, 2025</p> <p class="svelte-1li990r">When analyzing suspicious text, seeing only one view is never enough. You need both: the raw logical order exactly as stored, and the final rendered appearance exactly as the victim sees it.</p> <p class="svelte-1li990r">Many security analysts make the mistake of examining only the source text. They see paypal.com followed by strange symbols and assume it’s harmless formatting. But when the same text is rendered in a browser, email client, or messaging app, those invisible controls completely change the meaning.</p> <h2 class="svelte-1li990r">Two Views, One Truth</h2> <p class="svelte-1li990r">The raw view shows every control character highlighted and labeled. You can see exactly where an RLO begins, where a PDI closes an isolate, or where an LRM forces direction. This is the truth of what was written.</p> <p class="svelte-1li990r">The rendered view shows exactly what a normal user sees: no highlights, no warnings — just the final visual result. This is the lie the attacker wants the victim to believe.</p> <p class="svelte-1li990r">By placing both side by side, you instantly spot the deception. A domain that reads apple.com in the rendered panel but shows apple.com reversed with an RLO in the raw panel is an immediate red flag.</p> <h2 class="svelte-1li990r">Why This Matters in Practice</h2> <p class="svelte-1li990r">Security teams reviewing phishing reports, moderators checking social media posts, and developers auditing user-generated content all benefit from this dual view. It removes guesswork. Either the text means what it appears to mean — or it doesn’t.</p> <p class="svelte-1li990r">No amount of domain reputation, SSL certificates, or link scanning can protect against an attack that never touches the network in the first place. The deception happens entirely in the rendering engine.</p> <p class="italic-note svelte-1li990r">Seeing is not always believing. But seeing both truths at once is understanding.</p></article></div><!----><!--]--></div> <footer class="glass border-top py-3 mt-auto svelte-12qhfyh"><div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center small text-muted svelte-12qhfyh"><span class="svelte-12qhfyh">© 2025 AxelBase Bidirectional Text Inspector</span> <div class="d-flex gap-3 mt-2 mt-sm-0 svelte-12qhfyh"><a href="../../privacy" class="footer-link svelte-12qhfyh">Privacy</a> <a href="../../terms" class="footer-link svelte-12qhfyh">Terms</a></div></div></footer><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_9lwe51 = {
+						base: new URL("../..", location).pathname.slice(0, -1),
+						assets: "/bidi-inspector"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../../_app/immutable/entry/start.DPlYlPXD.js"),
+						import("../../_app/immutable/entry/app.BU7B6Hp-.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 9],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

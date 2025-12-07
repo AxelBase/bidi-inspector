@@ -1,0 +1,200 @@
+/* src/app.css */
+
+/* --- Theme Variables (Light Mode Default) --- */
+:root {
+  /* Core Colors */
+  --primary-brand: #F75E25; /* Bright Red Orange */
+  --primary-brand-hover: #d14613;
+  --secondary-brand: #87CEEB; /* Light Blue for outlines */
+  
+  /* Backgrounds & Glass */
+  --primary-bg: #f0f8ff;
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(135, 206, 235, 0.5); /* Light blue tinge */
+  --glass-shadow: 0 8px 32px 0 rgba(247, 94, 37, 0.1); /* Orange tinted shadow */
+  
+  /* Text */
+  --color-text-main: #2c3e50;
+  --color-text-muted: #546e7a;
+  
+  /* Inputs */
+  --input-bg: rgba(255, 255, 255, 0.9);
+  
+  /* Animated Blobs */
+  --blob-color-1: #ffccbc; /* Light Orange */
+  --blob-color-2: #b3e5fc; /* Light Blue */
+  
+  /* Layout */
+  --radius-lg: 24px;
+}
+
+/* --- Dark Mode Overrides --- */
+[data-bs-theme="dark"] {
+  --primary-bg: #0f172a; /* Deep Slate */
+  --glass-bg: rgba(30, 41, 59, 0.7); /* Dark Glass */
+  --glass-border: rgba(247, 94, 37, 0.3); /* Orange border in dark mode */
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  
+  --color-text-main: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  
+  --input-bg: rgba(15, 23, 42, 0.6);
+  
+  --blob-color-1: #4a1908; /* Dark Orange */
+  --blob-color-2: #0c2b46; /* Dark Blue */
+}
+
+/* --- Global & Reset --- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  background: var(--primary-bg);
+  color: var(--color-text-main);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* --- Animated Background Blobs --- */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: floatBlob 20s infinite alternate ease-in-out;
+  transition: background-color 0.5s ease;
+}
+
+body::before {
+  background: var(--blob-color-1);
+  top: -20%;
+  left: -20%;
+}
+
+body::after {
+  background: var(--blob-color-2);
+  bottom: -20%;
+  right: -20%;
+  animation-delay: -10s;
+}
+
+@keyframes floatBlob {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 50px) scale(1.1); }
+}
+
+main {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Glassmorphism Utilities --- */
+.glass, .glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  color: var(--color-text-main);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-card {
+  border-radius: var(--radius-lg);
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-brand);
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-text-main);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-brand);
+}
+
+/* --- Inputs --- */
+.form-control, .form-select {
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--color-text-main) !important;
+  border-radius: 1rem !important;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  background-color: var(--input-bg) !important;
+  box-shadow: 0 0 0 0.25rem rgba(247, 94, 37, 0.25) !important; /* Orange glow */
+  border-color: var(--primary-brand) !important;
+}
+
+/* --- Buttons --- */
+.btn {
+  border-radius: 50px !important;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--primary-brand) !important;
+  border-color: var(--primary-brand) !important;
+  box-shadow: 0 4px 15px rgba(247, 94, 37, 0.4);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-brand-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(247, 94, 37, 0.6);
+}
+
+/* --- Specific Bidi Inspector Styles --- */
+/* Ensure code visualization works perfectly */
+.code-view {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  white-space: pre-wrap !important;
+  word-break: break-all;
+}
+
+/* Badge styling for Detected Controls */
+.badge {
+    font-size: 0.75rem;
+    vertical-align: middle;
+    margin: 0 2px;
+    padding: 0.4em 0.8em;
+    border-radius: 0.5rem;
+}
+
+/* Table overrides for Glass */
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--color-text-main);
+    border-color: var(--glass-border);
+}
+.table-hover tbody tr:hover {
+    background-color: rgba(247, 94, 37, 0.1);
+}
