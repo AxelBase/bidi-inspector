@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://axelbase.github.io/bidi-inspector/sitemap.xml
+Sitemap: https://bidi-inspector.vercel.app/sitemap.xml
